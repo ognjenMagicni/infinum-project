@@ -8,10 +8,15 @@ from langchain_core.prompts import ChatPromptTemplate  # Prompting
 from langgraph.checkpoint.memory import MemorySaver
 from langchain.chat_models import init_chat_model
 
-os.environ["OPENAI_API_KEY"] = "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"
+def getApiKeys(file):
+    return file.readline().split(" ")[1][:-1]
+
+envFile = open("../application.env")
+os.environ["OPENAI_API_KEY"] = getApiKeys(envFile)
 os.environ["LANGSMITH_TRACING"]="true"
-os.environ["LANGSMITH_API_KEY"]="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"
-os.environ["TAVILY_API_KEY"]="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"
+os.environ["LANGSMITH_API_KEY"] = getApiKeys(envFile)
+os.environ["TAVILY_API_KEY"] = getApiKeys(envFile)
+envFile.close()
 
 app = FastAPI()
 

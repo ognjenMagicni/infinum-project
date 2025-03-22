@@ -66,14 +66,16 @@ def chat_history():
 def chatbot_response(query):
     model = init_chat_model("gpt-4o-mini", model_provider="openai")
     tools = [TavilySearchResults(max_results = 2)]
-    agent = create_react_agent(model, tools)
+    memory = MemorySaver()
+    agent = create_react_agent(model, tools, checkpointer=memory)
 
     system_template = "You are a legal advisor. You have to answer only questions about legal things. If asked something else, explain that is not your field of expertise. Do not use markdown, but you can use \n for pharagraphs"
     prompt_template = ChatPromptTemplate.from_messages(
         [("system", system_template), ("user", "{text}")]
     )
+    config = {"configurable":{"thread_id":"2"}}
     prompt = prompt_template.invoke({"text":query})
-    return agent.invoke(prompt)["messages"][-1].content
+    return agent.invoke(prompt,config)["messages"][-1].content
 
 @app.post("/chat")
 async def create_item(body: RequestBody):

@@ -36,6 +36,8 @@ conn = mysql.connector.connect(
 )
 envFile.close()
 
+
+
 app = FastAPI()
 
 class RequestBody(BaseModel):

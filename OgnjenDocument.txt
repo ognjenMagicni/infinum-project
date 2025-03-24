@@ -33,6 +33,9 @@ Trazio sam da mi importuje biblioteke za llm kod, ubacio je visak biblioteke i u
 komanda da uzmem string osim zadnjeg karaktera, check
 Napraviti backend konekciju sa streamlit, check
 Problem sa \n ne uvodi novi red u streamlite, nije mi dao resenje u ovom slucaju
+Da mi izgenerise graoh sa dva toola, nije uspio, ne prati standard dokumentacije, recimo nema """ """ opisa unutar toola
+Sta je potrebno legal advisoru dao mi je smjernice ali mislim da su bolje bile na web sajtu
+Pitanja koja se mogu postaviti legal advisoru
 
 
 Pokretanje docker mysql
@@ -84,4 +87,27 @@ print("Data inserted successfully!")
 # Close the connection
 cursor.close()
 conn.close()
+
+
+
+
+Sta je dobar model
+1. Odmah krene pravno da govori kako ide procedura ako u pitanju ima osnove za to
+2. Ukoliko prica o pravu uvijek da navodi zakon i clan o oblasti da potkrijepi svoje tvrdnje
+3. Prvo iskoristi retriever tool ako mislis da nisi dobio odgovarajuce informacije iskoristi tek onda tavily
+
+PostgreSQL
+session identifiers
+MEssage time
+Error handiling for api failure
+Zasto git commit
+
+Error handling and edge casesc
+challenges i kako si ih rijesio (graph sa travily i retriever citanje dokumentacije koja te ne pripremi dovoljno gledanje yt videa razbijanje problema na jednostavnije, napraviti dobar prompt ali to je napravi vidi reyultat, streamlit ali navikao sam se na ucenje stvari koje prvi put vidim skupljanje osnovnih komandi i naredbi koriscenje gpt sa dizajn, docker kako dokerizovati kako podici jedan kontejner kako ga izmijeniti i to sacuvati kako podici backend nisam uspio da umrezim, pisem detaljnu dokumentaciju
+
+gmail
+projectinfinum@gmail.com
+MousePad123#
+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 langsmith ket
+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
 

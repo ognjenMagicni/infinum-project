@@ -4,3 +4,4 @@ documents.zip
 database/Ognjen.sql
 backend/__pycache__
 backend/venv
+backend/.gitignore

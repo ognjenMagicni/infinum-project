@@ -15,15 +15,10 @@ from langchain_chroma import Chroma
 from langchain_openai import OpenAIEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
-import mysql.connector
+import psycopg2
 
 # Establish the connection
-conn = mysql.connector.connect(
-    host="localhost",       # e.g., "localhost"
-    user="root",       # e.g., "root"
-    password="simple",
-    database="infinum"
-)
+
 
 
 def getApiKeys(file):
@@ -36,7 +31,7 @@ os.environ["LANGSMITH_API_KEY"] = getApiKeys(envFile)
 os.environ["TAVILY_API_KEY"] = getApiKeys(envFile)
 
 
-conn = mysql.connector.connect(
+conn = psycopg2.connect(
     host=getApiKeys(envFile),
     user=getApiKeys(envFile),
     password=getApiKeys(envFile),
@@ -114,7 +109,7 @@ app = FastAPI()
 
 def insert_in_database(query:str, response:str):
     cursor = conn.cursor()
-    insert_query = "INSERT INTO chat_history (who, message) VALUES (%s, %s)"
+    insert_query = "INSERT INTO chat_history (role, message) VALUES (%s, %s)"
     data = [
         ("User", query),
         ("AI", response)

@@ -100,7 +100,8 @@ I had to quickly learn basic fundamentals of new technologies such as Streamlit 
 ## Future Upgrades
 
 While building project I set the architecture to be upgraded in following
-1. Adding **LangSmith** functionality to track messages between chat bot and users.
-2. Adding **sessions** to enable users start a new conversation with chat bot, without interfering with previous messages
+1. Add **LangSmith** functionality to track messages between chat bot and users.
+2. Add **sessions** to enable users start a new conversation with chat bot, without interfering with previous messages.
+3. Improve readablity of code by moving functions from main.py files to another Python file.
 
 

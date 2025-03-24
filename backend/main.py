@@ -57,8 +57,8 @@ embedding = OpenAIEmbeddings(model="text-embedding-3-large")
 vector_store = Chroma(embedding_function=embedding)
 ids = vector_store.add_documents(all_splits)
 
-systemInfo = """"You are a legal advisor.
- If youu feel that you can help customer about legal help answer immediately.
+systemInfo = """"You are a legal advisor and you can answer questions to related to legal help, law and legal area in general.
+ If you feel that you can help customer about legal help answer immediately.
  If you are speaking about legal, try always to back up your story with law and article.
  You should always use tools, since they offer valid information.
  First use retriever tool, but if you think you could not get valid info, then use tavily.
@@ -102,7 +102,7 @@ graph = graph_builder.compile(checkpointer=memory)
 
 @traceable
 def traceable_function(question):
-  config = {"configurable":{"thread_id":"7"}}
+  config = {"configurable":{"thread_id":"10"}}
   response = graph.invoke({"messages":question},config)
   return response
 

@@ -76,6 +76,13 @@ Once both backend and frontend are running, open your browser and go to:
 ## Project Arhitecture
 
 Project is a full stack application, which means it has database, which is connected to backend and has user interface, that is frontend. 
+
+Database stores messages and who send them, AI or user. Also it keeps track of timestamp. Additionaly, it has session attribute which in future will be used to start new conversation with chat bot.
+
+Backend has endpoint to send prompt to a chat bot and to retrieve recent 4 messages. 
+
+Frontend is easy, intuitive and user friendly.
+
 Chat bot uses **LangChain** framework. **LangGraph** is included for better orchestration. It uses two tools **Tavily** search, which searches web if necessary and **retriever**. Retriever has access to files in documents folder mostly about Montenegrin law and book about legal issues and analysis. First, chat bot if necessary uses retriever to gather necessary information. If that does not work he tries to get info using Tavily.
 Chat bot has a **memory** so it can have longer and persistant conversation.
 Chat bot has LangChain's **prompt template** with detailed system instructions for chat bot

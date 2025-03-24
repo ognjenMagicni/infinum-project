@@ -1,6 +1,10 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 import os
+import psycopg2
+from datetime import datetime
+import string
+import random
 
 from langchain.tools.tavily_search import TavilySearchResults  # Web search tool
 from langgraph.prebuilt import create_react_agent
@@ -15,7 +19,6 @@ from langchain_chroma import Chroma
 from langchain_openai import OpenAIEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
-import psycopg2
 
 # Establish the connection
 
@@ -23,6 +26,11 @@ import psycopg2
 
 def getApiKeys(file):
     return file.readline().split(" ")[1][:-1]
+
+def generate_session():
+   character = string.ascii_letters
+   return ''.join( random.choice(character) for _ in range(10))
+   
 
 envFile = open("../application.env")
 os.environ["OPENAI_API_KEY"] = getApiKeys(envFile)
@@ -95,7 +103,7 @@ graph = graph_builder.compile(checkpointer=memory)
 
 @traceable
 def traceable_function(question):
-  config = {"configurable":{"thread_id":"6"}}
+  config = {"configurable":{"thread_id":"7"}}
   response = graph.invoke({"messages":question},config)
   return response
 
@@ -109,10 +117,10 @@ app = FastAPI()
 
 def insert_in_database(query:str, response:str):
     cursor = conn.cursor()
-    insert_query = "INSERT INTO chat_history (role, message) VALUES (%s, %s)"
+    insert_query = "INSERT INTO chat_history (role, message,date) VALUES (%s, %s, %s)"
     data = [
-        ("User", query),
-        ("AI", response)
+        ("User", query, datetime.now()),
+        ("AI", response, datetime.now())
     ]
     cursor.executemany(insert_query, data)
     conn.commit()
@@ -121,7 +129,7 @@ def insert_in_database(query:str, response:str):
 
 def chat_history():
     cursor = conn.cursor()
-    query = "SELECT * FROM chat_history"
+    query = "select * from chat_history WHERE date IS NOT NULL ORDER BY date DESC LIMIT 4"
     cursor.execute(query)
     rows = cursor.fetchall()
     return rows
@@ -141,3 +149,6 @@ async def create_item(body: RequestBody):
 async def get_chat_history():
     return chat_history()
 
+@app.get("/new_session")
+async def new_session():
+   return generate_session()

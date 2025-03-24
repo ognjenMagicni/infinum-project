@@ -35,7 +35,6 @@ def generate_session():
 envFile = open("../application.env")
 os.environ["OPENAI_API_KEY"] = getApiKeys(envFile)
 os.environ["LANGSMITH_TRACING"]="true"
-os.environ["LANGSMITH_API_KEY"] = getApiKeys(envFile)
 os.environ["TAVILY_API_KEY"] = getApiKeys(envFile)
 
 
